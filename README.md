@@ -50,6 +50,7 @@ let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
 let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 ```
 
 ### Highlighting
@@ -57,9 +58,19 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 `haskell-vim` has an opinionated highlighting. If you do not like that you can switch to
 a more traditional mode by setting `g:haskell_classic_highlighting` to `1`.
 
+Disabling Template Haskell and Quasiquoting syntax is possible by setting
+`g:haskell_disable_TH` to `1`.
+
 ### Indentation
 
 To configure indentation in `haskell-vim` you can use the following variables to change indentation depth, just add the according line to your `.vimrc`.
+
+If you dislike how indentation works you can disable it by setting `g:haskell_indent_disable` to
+`1`.
+
+Additionally you can use the
+[vim-hindent](https://github.com/alx741/vim-hindent) plugin to achieve automatic
+indentation using *hindent*.
 
 #### Haskell
 
@@ -85,6 +96,16 @@ To configure indentation in `haskell-vim` you can use the following variables to
         where f :: Int -> Int
         >>>>>>f x = x
 
+* `let g:haskell_indent_before_where = 2`
+
+        foo
+        >>where
+
+* `let g:haskell_indent_after_bare_where = 2`
+
+        where
+        >>foo
+
 * `let g:haskell_indent_do = 3`
 
         do x <- a
@@ -100,6 +121,13 @@ To configure indentation in `haskell-vim` you can use the following variables to
         f x y
         >>|
 
+`haskell-vim` also supports an alterative style for `case` indentation.
+
+* `let g:haskell_indent_case_alternative = 1`
+
+        f xs ys = case xs of
+        >>[]     -> ...
+        >>(y:ys) -> ...
 
 
 #### Cabal
